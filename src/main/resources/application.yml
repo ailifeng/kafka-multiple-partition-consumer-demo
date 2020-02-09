@@ -1,0 +1,31 @@
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: pg1.vpc.cloudera.com:9092
+          minPartitionCount: 4
+      bindings:
+        # c5-in is a channel name. Its name is defined in binding interface C5Stream
+        c5-in-ch0:
+          destination: c5
+          group: c5-group-0
+        c5-in-ch1:
+          destination: c5
+          group: c5-group-1
+        c6-in:
+          destination: c6
+          group: c6-group
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    health:
+      show-details: always
+
+  endpoints:
+    web.exposure.include: "*"
+
+server:
+  port: 8081
